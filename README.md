@@ -1,0 +1,2 @@
+# starraid
+experiments with golang
