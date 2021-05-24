@@ -1,11 +1,8 @@
 
-### Install ###
-cd assets
-cp config.init.in config.ini
-./seed.bash
+# Install
+ - cd assets
+ - cp config.init.in config.ini
+ - ./seed.bash
 
-### run ###
-
-
-### generate api ###
-protoc --proto_path=api/proto/ --go_out=. api/proto/*.proto
+## re-generate api
+ - protoc --proto_path=api/ --go_out=. --go-grpc_out=. api/api.proto

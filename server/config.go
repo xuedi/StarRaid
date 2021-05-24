@@ -11,6 +11,8 @@ type Config struct {
 	dsn       string
 	targetTps int
 	debug     bool
+	host      string
+	port      int
 }
 
 func (c *Config) load(configFile string) {
@@ -33,6 +35,14 @@ func (c *Config) load(configFile string) {
 		fmt.Printf("config has an invalid 'targetTps' setting: %v", c.targetTps)
 		os.Exit(1)
 	}
+
+	c.port, err = cfg.Section("server").Key("port").Int()
+	if err != nil || c.port <= 0 {
+		fmt.Printf("config has an invalid 'port' setting: %v", c.port)
+		os.Exit(1)
+	}
+
+	c.host = cfg.Section("server").Key("host").String()
 
 	c.dsn = fmt.Sprintf(
 		"%s:%s@tcp(%s:%s)/%s",

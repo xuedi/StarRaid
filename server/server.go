@@ -18,13 +18,14 @@ type Server struct {
 	config       Config
 	objects      Objects
 	users        Users
+	net          Network
 }
 
 // Init register interrupt signals and timers
 func (s *Server) Init() {
 	sigChan := make(chan os.Signal)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
-	fmt.Println("Listening on 127.0.0.1:1337 - end server with CTRL+C")
+	fmt.Println("End server with CTRL+C")
 	go func() {
 		<-sigChan
 		fmt.Println("\n... like tears in rain. Time to die")
@@ -42,6 +43,11 @@ func (s *Server) Init() {
 	// load once database objects
 	s.objects.Load(s.config.dsn)
 	s.users.Load(s.config.dsn)
+
+	// get the network started
+	s.net = Network{}
+	s.net.RegisterObjects(s.objects)
+	s.net.load(s.config.host, s.config.port)
 }
 
 // Tick Should be in a separate go routine and updating via channel
