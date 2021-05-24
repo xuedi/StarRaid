@@ -15,3 +15,6 @@ message ActionResponse {
     repeated ObjectResponse objects = 2;
 }
 
+service ActionService {
+    rpc Search(ActionRequest) returns (ActionResponse);
+}

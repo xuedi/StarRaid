@@ -12,3 +12,6 @@ message LoginResponse {
   repeated ObjectResponse objects = 2;
 }
 
+service LoginService {
+  rpc Search(LoginRequest) returns (LoginResponse);
+}

@@ -10,3 +10,6 @@ message UpdateResponse {
     }
 }
 
+service UpdateService {
+    rpc Search(UpdateRequest) returns (UpdateResponse);
+}

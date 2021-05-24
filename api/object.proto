@@ -11,3 +11,6 @@ message ObjectResponse {
   int64 y = 4;
 }
 
+service ObjectService {
+  rpc Search(ObjectRequest) returns (ObjectResponse);
+}
