@@ -7,4 +7,5 @@ cp config.init.in config.ini
 ### run ###
 
 
-
+### generate api ###
+protoc --proto_path=api/proto/ --go_out=. api/proto/*.proto

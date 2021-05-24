@@ -1,6 +1,8 @@
 syntax = "proto3";
 import "object.proto";
 
+option go_package = "api/";
+
 message ActionRequest {
     string token = 1;
     enum ActionType {
