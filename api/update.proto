@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message UpdateRequest {
+    string token = 1;
+}
+
+message UpdateResponse {
+    message UpdateRequest {
+        string token = 1;
+    }
+}
+

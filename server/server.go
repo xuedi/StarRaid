@@ -14,9 +14,10 @@ type Server struct {
 	tps          int
 	tickSleep    time.Duration
 	name         string
-	config       Config
 	secondTarget time.Time
+	config       Config
 	objects      Objects
+	users        Users
 }
 
 // Init register interrupt signals and timers
@@ -32,7 +33,7 @@ func (s *Server) Init() {
 
 	// create config file
 	s.config = Config{}
-	s.config.load("config.ini")
+	s.config.load("assets/config.ini")
 
 	// first target way in the past
 	s.secondTarget = time.Unix(0, 0)
@@ -40,6 +41,7 @@ func (s *Server) Init() {
 
 	// load once database objects
 	s.objects.Load(s.config.dsn)
+	s.users.Load(s.config.dsn)
 }
 
 // Tick Should be in a separate go routine and updating via channel
@@ -66,8 +68,7 @@ func (s *Server) TickSecond() {
 		}
 	}
 
-	fmt.Println("Ticks: ", s.tps, "Sleep: ", s.tickSleep, "Objects: ", s.objects.Count())
+	fmt.Println("Ticks:", s.tps, "Sleep:", s.tickSleep, "Objects:", s.objects.Count(), "Users:", s.users.Count())
 	s.secondTarget = time.Now().Add(time.Second)
 	s.tps = 0
 }
-

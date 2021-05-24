@@ -1,0 +1,11 @@
+
+[database]
+user = exampleUser
+pass = examplePass
+name = exampleDatabaseName
+host = 127.0.0.1
+port = 3306
+
+[server]
+debug = true
+targetTps = 125

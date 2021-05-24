@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "object.proto";
+
+message ActionRequest {
+    string token = 1;
+    enum ActionType {
+        SCAN = 0;
+        SHOOT = 1;
+        CONTACT = 2;
+    }
+    ActionType corpus = 2;
+}
+
+message ActionResponse {
+    repeated ObjectResponse objects = 2;
+}
+

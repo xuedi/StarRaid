@@ -4,33 +4,9 @@ import (
 	"database/sql"
 	uuid "github.com/satori/go.uuid"
 	"log"
-	"math"
 	"math/rand"
 	"time"
 )
-
-type point struct {
-	x int64
-	y int64
-}
-func (p point) Distance(p2 point) int64 {
-	first := math.Pow(float64(p2.x-p.x), 2)
-	second := math.Pow(float64(p2.y-p.y), 2)
-	return int64(math.Sqrt(first + second))
-}
-
-type neighbour struct {
-	id       uuid.UUID
-	distance int64
-	visible  bool
-}
-func (n *neighbour) setVisibilityTo(visualRange int64)  {
-	if n.distance < visualRange {
-		n.visible = true
-	} else {
-		n.visible = true
-	}
-}
 
 type Object struct {
 	id                uuid.UUID
